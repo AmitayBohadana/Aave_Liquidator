@@ -65,7 +65,8 @@ it can be tested on a forked mainnet.
    it is possible that on a forked mainnet without enteties that are doing arbitrage the liquidation transaction will LOOSE money. but in realety it shoudn't
 
 
-* Test file Senario:
+<!-- Test plan -->
+## Test plan
    1. user deposit colletaral (WBTC) to to aave
    2. user borrow an amount of USDT
    3. the price of WBTC drops
