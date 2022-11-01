@@ -7,11 +7,14 @@ import 'hardhat-gas-reporter';
 import 'hardhat-typechain';
 import 'solidity-coverage';
 
+require('dotenv').config();
+
 const SKIP_LOAD = process.env.SKIP_LOAD === 'true';
 const DEFAULT_BLOCK_GAS_LIMIT = 8000000;
 const DEFAULT_GAS_MUL = 5;
 const HARDFORK = 'istanbul';
 const ETHERSCAN_KEY = process.env.ETHERSCAN_KEY || '';
+const ALCHEMY_KEY = process.env.ALCHEMY_KEY || '';
 const MNEMONIC_PATH = "m/44'/60'/0'/0";
 const MNEMONIC = process.env.MNEMONIC || '';
 const UNLIMITED_BYTECODE_SIZE = process.env.UNLIMITED_BYTECODE_SIZE === 'true';
@@ -40,7 +43,7 @@ const buidlerConfig: HardhatUserConfig = {
     },
     hardhat: {
       forking: {
-        url: "https://eth-mainnet.g.alchemy.com/v2/iK90jGtrwumtlgRlWWGbwW0Ep0I8cWLN",
+        url: ALCHEMY_KEY,
    
       }
     },
