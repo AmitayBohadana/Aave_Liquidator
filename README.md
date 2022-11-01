@@ -60,8 +60,9 @@ it can be tested on a forked mainnet.
    2. To liquidate and then sell the asset on Uniswap (or any other uniswap clone by configuration)    
    3. To do the above using flashloan. take a laon, liquidate, sell the asset on Uniswap and pay back the loan and the leftovers are profits.
 
-   *Important to notice: when I change the oracle price from the MockAggregator I do not change the price of the asset on uniswap.
-      so it is possible that on a forked mainnet without enteties that are doing arbitrage the liquidation transaction will LOOSE money. but in realety it shoudn't
+* Important to notice: 
+   when oracle price is changed using MockAggregator the asset price on Uniswap DO NOT change.
+   it is possible that on a forked mainnet without enteties that are doing arbitrage the liquidation transaction will LOOSE money. but in realety it shoudn't
 
 
 * Test file Senario:
