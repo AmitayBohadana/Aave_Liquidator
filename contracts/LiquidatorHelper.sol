@@ -28,6 +28,15 @@ contract LiquidatorHelper {
     lendingPool = _lendingPool;
   }
 
+  /**
+  * @notice fund and then liquidate the borrower on aave protocol
+  * @param pool address on of the token to be funded
+  * @param collateralAsset the collateral asset of the borowwer
+  * @param debtAsset the debt asset
+  * @param user the borrower address
+  * @param debtToCover the amount of debt to cover
+  * @param receiveAToken boolean - if true the liquidation call will return the AToken, if false it will return the collateral asset
+**/
   function liquidationCall(
     address pool,
     address collateralAsset,
@@ -45,10 +54,24 @@ contract LiquidatorHelper {
     );
   }
 
-  function fund(address debtAsset, uint256 debtToCover) external {
-    IERC20(debtAsset).safeTransferFrom(msg.sender, address(this), debtToCover);
+  /**
+     * @notice fund the LiquidatorHelper with tokens
+     * @param token address on of the token to be funded
+     * @param amount the amount
+     **/
+  function fund(address token, uint256 amount) external {
+    IERC20(token).safeTransferFrom(msg.sender, address(this), amount);
   }
 
+  /**
+  * @notice fund and then liquidate the borrower on aave protocol
+  * @param pool address on of the token to be funded
+  * @param collateralAsset the collateral asset of the borowwer
+  * @param debtAsset the debt asset
+  * @param borrower the borrower address
+  * @param debtToCover the amount of debt to cover
+  * @param receiveAToken boolean - if true the liquidation call will return the AToken, if false it will return the collateral asset
+**/
   function fundAndLiquidate(
     address pool,
     address collateralAsset,
@@ -70,6 +93,15 @@ contract LiquidatorHelper {
     );
   }
 
+    /**
+  * @notice fund, liquidate the borrower on aave protocol and then sell the asset on a dex
+  * @param pool address on of the token to be funded
+  * @param collateralAsset the collateral asset of the borowwer
+  * @param debtAsset the debt asset
+  * @param borrower the borrower address
+  * @param debtToCover the amount of debt to cover
+  * @param receiveAToken boolean - if true the liquidation call will return the AToken, if false it will return the collateral asset
+**/
   function fundLiquidateAndSell(
     address pool,
     address collateralAsset,
@@ -99,6 +131,15 @@ contract LiquidatorHelper {
     swap(collateralAsset, debtAsset, newBalance, amountMin, address(this));
   }
 
+    /**
+  * @notice fund with flashlaon, liquidate the borrower on aave protocol, sell the asset on a dex and pay the loan back
+  * @param pool address on of the token to be funded
+  * @param collateralAsset the collateral asset of the borowwer
+  * @param debtAsset the debt asset
+  * @param borrower the borrower address
+  * @param debtToCover the amount of debt to cover
+  * @param receiveAToken boolean - if true the liquidation call will return the AToken, if false it will return the collateral asset
+**/
   function FlashLoanLiquidateAndSell(
     address pool,
     address collateralAsset,
@@ -125,10 +166,19 @@ contract LiquidatorHelper {
       params,
       referal
     );
-
-    console.log("after flash loan");
   }
 
+   /**
+   * @notice Executes an operation after receiving the flash-borrowed assets
+   * @dev Ensure that the contract can return the debt + premium, e.g., has
+   *      enough funds to repay and has approved the Pool to pull the total amount
+   * @param assets The addresses of the flash-borrowed assets
+   * @param amounts The amounts of the flash-borrowed assets
+   * @param premiums The fee of each flash-borrowed asset
+   * @param initiator The address of the flashloan initiator
+   * @param params The byte-encoded params passed when initiating the flashloan
+   * @return True if the execution of the operation succeeds, false otherwise
+   */
   function executeOperation(
     address[] calldata assets,
     uint256[] calldata amounts,
@@ -142,7 +192,6 @@ contract LiquidatorHelper {
       params,
       (address, address, address)
     );
-    console.log("in excecution");
     IERC20(debtAsset).safeApprove(pool, debtToCover);
     ILendingPool(pool).liquidationCall(collateralAsset, debtAsset, borrower, debtToCover, false);
 
@@ -209,7 +258,6 @@ contract LiquidatorHelper {
       path[1] = weth;
       path[2] = _tokenOut;
     }
-
     uint256[] memory amountOutMins = IUniswapV2Router02(v2Router02).getAmountsOut(_amountIn, path);
     return amountOutMins[path.length - 1];
   }

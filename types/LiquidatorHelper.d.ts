@@ -167,14 +167,14 @@ export class LiquidatorHelper extends Contract {
     ): Promise<ContractTransaction>;
 
     fund(
-      debtAsset: string,
-      debtToCover: BigNumberish,
+      token: string,
+      amount: BigNumberish,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
     "fund(address,uint256)"(
-      debtAsset: string,
-      debtToCover: BigNumberish,
+      token: string,
+      amount: BigNumberish,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
@@ -286,14 +286,14 @@ export class LiquidatorHelper extends Contract {
   ): Promise<ContractTransaction>;
 
   fund(
-    debtAsset: string,
-    debtToCover: BigNumberish,
+    token: string,
+    amount: BigNumberish,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
   "fund(address,uint256)"(
-    debtAsset: string,
-    debtToCover: BigNumberish,
+    token: string,
+    amount: BigNumberish,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
@@ -405,14 +405,14 @@ export class LiquidatorHelper extends Contract {
     ): Promise<boolean>;
 
     fund(
-      debtAsset: string,
-      debtToCover: BigNumberish,
+      token: string,
+      amount: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
 
     "fund(address,uint256)"(
-      debtAsset: string,
-      debtToCover: BigNumberish,
+      token: string,
+      amount: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -527,14 +527,14 @@ export class LiquidatorHelper extends Contract {
     ): Promise<BigNumber>;
 
     fund(
-      debtAsset: string,
-      debtToCover: BigNumberish,
+      token: string,
+      amount: BigNumberish,
       overrides?: Overrides
     ): Promise<BigNumber>;
 
     "fund(address,uint256)"(
-      debtAsset: string,
-      debtToCover: BigNumberish,
+      token: string,
+      amount: BigNumberish,
       overrides?: Overrides
     ): Promise<BigNumber>;
 
@@ -651,14 +651,14 @@ export class LiquidatorHelper extends Contract {
     ): Promise<PopulatedTransaction>;
 
     fund(
-      debtAsset: string,
-      debtToCover: BigNumberish,
+      token: string,
+      amount: BigNumberish,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
     "fund(address,uint256)"(
-      debtAsset: string,
-      debtToCover: BigNumberish,
+      token: string,
+      amount: BigNumberish,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
