@@ -43,7 +43,34 @@ _Below is an example of how you can instruct your audience on installing and set
    TENDERLY_PROJECT=""
    TENDERLY_USERNAME=""
    ```
+<!-- USAGE EXAMPLES -->
+## Description
+This project contains a liquidator ( and arbitrageur)  agent on Aave and a scenario to reduce Aave’s oracle prices to that liquidations would trigger.
+it can be tested on a forked mainnet.
 
+* methodology chosen for manipulation of Oracle prices:
+   In order to manipulate the oracle price I have choosed to deploy a MockAggregator with the desaired asset price.
+   in order to set this MockAggregator as the source of an asset I have called `setAssetSources` on AaveOracle contract.
+   in that way I could change the price and the Helth factor and make a liquidation senario.
+
+* liquidator agent:
+   the liquidator agent is using the script under the scripts/ folder.
+   first I deploy the LiquidatorHelper contract. this contract has the ability
+   1. To liquidate an asset of a borrower
+   2. To liquidate and then sell the asset on Uniswap (or any other uniswap clone by configuration)    
+   3. To do the above using flashloan. take a laon, liquidate, sell the asset on Uniswap and pay back the loan and the leftovers are profits.
+
+   *Important to notice: when I change the oracle price from the MockAggregator I do not change the price of the asset on uniswap.
+      so it is possible that on a forked mainnet without enteties that are doing arbitrage the liquidation transaction will LOOSE money. but in realety it shoudn't
+
+
+* Test file Senario:
+   1. user deposit colletaral (WBTC) to to aave
+   2. user borrow an amount of USDT
+   3. the price of WBTC drops
+   4. user HF going below 1 and he can be liquidate
+   5. liquidator is liquidating the user using flashloan and sell the WBTC on Uniswap and left with profit
+   
 <!-- USAGE EXAMPLES -->
 ## Usage
 
