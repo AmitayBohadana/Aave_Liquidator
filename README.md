@@ -51,7 +51,7 @@ _Below is an example of how you can instruct your audience on installing and set
    ```sh
    npx hardhat node --network hardhat
    ```
-or
+   or
    ```sh
    npx hardhat node --fork https://eth-mainnet.alchemyapi.io/v2/<key>
    ```
