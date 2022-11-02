@@ -26,13 +26,13 @@ _Below is an example of how you can instruct your audience on installing and set
    ```sh
    npm install
    ```
-4. Create an .env file with your alchemy api key
+4. Create an .env file with your alchemy api key for ethereum mainnet
    ```js
    # Mnemonic, only first address will be used
     MNEMONIC=""
 
    # Add Alchemy or Infura provider keys, alchemy takes preference at the config level
-   ALCHEMY_KEY="https://eth-mainnet.g.alchemy.com/v2/iK90jGtrwumtlgRlWWGbwW0Ep0I8cWLN"
+   ALCHEMY_KEY="<key>"
    INFURA_KEY=""
 
 
@@ -48,6 +48,10 @@ _Below is an example of how you can instruct your audience on installing and set
 
 1. open a terminal and fork mainnet using hardhat command
 
+   ```sh
+   npx hardhat node --network hardhat
+   ```
+or
    ```sh
    npx hardhat node --fork https://eth-mainnet.alchemyapi.io/v2/<key>
    ```

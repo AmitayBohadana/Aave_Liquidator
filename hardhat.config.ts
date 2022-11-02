@@ -43,7 +43,7 @@ const buidlerConfig: HardhatUserConfig = {
     },
     hardhat: {
       forking: {
-        url: ALCHEMY_KEY,
+        url: 'https://eth-mainnet.g.alchemy.com/v2/' + ALCHEMY_KEY,
    
       }
     },
